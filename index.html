@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiram TECH | Grossiste & Détail Smartphones, Accessoires & Électronique - Brazzaville</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Lien vers ton fichier CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- BARRE SUPÉRIEURE -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span><i class="fa-solid fa-location-dot"></i> <span id="topbarAddress">90 rue Kingoué, quartier La Base, Mfilou, Brazzaville</span></span>
+        <span><i class="fa-solid fa-truck-fast"></i> Livraison express Brazzaville & Pointe-Noire</span>
+      </div>
+      <div class="top-bar-right">
+        <a href="javascript:void(0)" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> Espace Admin</a>
+        <a href="javascript:void(0)" onclick="openQuickWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Support Client</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER PRINCIPAL -->
+  <header class="main-header">
+    <div class="container header-grid">
+      <a href="#" class="brand-logo" onclick="resetFilters(); return false;">
+        <div class="brand-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div>
+          <span class="brand-name">Hiram <span>TECH</span></span>
+          <span class="brand-sub">B2B & B2C Marketplace</span>
+        </div>
+      </a>
+
+      <div class="search-box">
+        <select id="searchCategorySelect" aria-label="Catégorie">
+          <option value="all">Tout le catalogue</option>
+          <option value="Smartphones">Smartphones</option>
+          <option value="Chargeurs & Câbles">Chargeurs & Câbles</option>
+          <option value="Audio & Montres">Audio & Montres</option>
+          <option value="Électroménager">Électroménager</option>
+          <option value="Réparation & Pièces">Réparation & Pièces</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Rechercher iPhone, Infinix, chargeur rapide, mixeur, écran..." onkeyup="filterProducts()">
+        <button onclick="filterProducts()"><i class="fa-solid fa-magnifying-glass"></i> Rechercher</button>
+      </div>
+
+      <div class="header-actions">
+        <button class="action-btn admin-trigger" onclick="openAdminModal()">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Gérer la boutique</span>
+        </button>
+        <button class="action-btn" onclick="openCart()">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Panier</span>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- BARRE DE NAVIGATION CATÉGORIES -->
+  <nav class="cat-nav">
+    <div class="container">
+      <div class="cat-list" id="categoryPills">
+        <button class="cat-pill active" data-cat="all" onclick="selectCategory('all', this)"><i class="fa-solid fa-border-all"></i> Tous les produits</button>
+        <button class="cat-pill" data-cat="Smartphones" onclick="selectCategory('Smartphones', this)"><i class="fa-solid fa-mobile-screen-button"></i> Smartphones</button>
+        <button class="cat-pill" data-cat="Chargeurs & Câbles" onclick="selectCategory('Chargeurs & Câbles', this)"><i class="fa-solid fa-bolt"></i> Chargeurs & Câbles</button>
+        <button class="cat-pill" data-cat="Audio & Montres" onclick="selectCategory('Audio & Montres', this)"><i class="fa-solid fa-headphones"></i> Audio & Montres</button>
+        <button class="cat-pill" data-cat="Électroménager" onclick="selectCategory('Électroménager', this)"><i class="fa-solid fa-blender"></i> Électroménager</button>
+        <button class="cat-pill" data-cat="Réparation & Pièces" onclick="selectCategory('Réparation & Pièces', this)"><i class="fa-solid fa-screwdriver-wrench"></i> Réparation & Pièces</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="container">
+    <!-- BANNIÈRE HERO -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-tag"><i class="fa-solid fa-circle-check"></i> Fournisseur Direct & Atelier Certifié</div>
+        <h1>Importation Directe, Gros & Détail à Brazzaville</h1>
+        <p>Téléphones neufs et reconditionnés, accessoires haute performance, électroménager et pièces détachées. Profitez de nos tarifs grossistes dès 3 pièces achetées.</p>
+        <div class="hero-cta-group">
+          <button class="btn-primary" onclick="document.getElementById('catalogSection').scrollIntoView({behavior:'smooth'})">
+            <i class="fa-solid fa-bag-shopping"></i> Explorer le catalogue
+          </button>
+          <button class="btn-outline-light" onclick="openQuickWhatsApp()">
+            <i class="fa-brands fa-whatsapp"></i> Demander un devis gros
+          </button>
+        </div>
+      </div>
+      <div class="hero-stats-card">
+        <h3><i class="fa-solid fa-store" style="color:var(--primary)"></i> Boutique Physique</h3>
+        <div class="stat-row">
+          <i class="fa-solid fa-map-pin"></i>
+          <div>
+            <strong>Adresse Officielle</strong>
+            <span id="heroAddressDisplay">90 rue Kingoué, quartier La Base, Mfilou, Brazzaville</span>
+          </div>
+        </div>
+        <div class="stat-row">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <div>
+            <strong>Tarifs Dégressifs (MOQ)</strong>
+            <span>Prix grossiste automatique dans votre panier</span>
+          </div>
+        </div>
+        <div class="stat-row">
+          <i class="fa-solid fa-wrench"></i>
+          <div>
+            <strong>Service Technique & Déblocage</strong>
+            <span>Réparation express sur place & garantie testée</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EN-TÊTE CATALOGUE -->
+    <div class="catalog-header" id="catalogSection">
+      <div>
+        <h2 id="catalogTitle">Catalogue des Produits</h2>
+        <span class="catalog-count" id="catalogCount">Chargement des articles...</span>
+      </div>
+      <div class="sort-controls">
+        <label for="sortSelect"><i class="fa-solid fa-arrow-up-wide-short"></i> Trier :</label>
+        <select id="sortSelect" onchange="filterProducts()">
+          <option value="featured">Nouveautés & Vedettes</option>
+          <option value="price-asc">Prix croissant (FCFA)</option>
+          <option value="price-desc">Prix décroissant (FCFA)</option>
+          <option value="stock">Disponibilité en stock</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- GRILLE DES PRODUITS -->
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Hiram <span>TECH</span></div>
+          <p class="footer-text">Votre partenaire de confiance à Brazzaville pour l'achat en gros et au détail de smartphones, accessoires électroniques, appareils ménagers et maintenance mobile.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Catégories</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="selectCategory('Smartphones')">Smartphones & iPhone</a></li>
+            <li><a href="javascript:void(0)" onclick="selectCategory('Chargeurs & Câbles')">Chargeurs Rapides & Câbles</a></li>
+            <li><a href="javascript:void(0)" onclick="selectCategory('Audio & Montres')">Écouteurs & Smartwatches</a></li>
+            <li><a href="javascript:void(0)" onclick="selectCategory('Électroménager')">Machines de Ménage</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact & Localisation</h4>
+          <ul class="footer-text">
+            <li><i class="fa-solid fa-location-dot" style="color:var(--primary)"></i> <span id="footerAddress">90 rue Kingoué, quartier La Base, Mfilou, Brazzaville</span></li>
+            <li><i class="fa-brands fa-whatsapp" style="color:#25D366"></i> <span id="footerPhone">+242 06 000 00 00</span></li>
+            <li><i class="fa-regular fa-clock" style="color:var(--primary)"></i> Lun - Sam : 08h00 - 19h30</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Hiram TECH Brazzaville. Tous droits réservés.</span>
+        <span>Plateforme propulsée par HIRAM Architech Web</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PANIER LATÉRAL -->
+  <div class="drawer-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping" style="color:var(--primary)"></i> Mon Panier (<span id="drawerCount">0</span>)</h3>
+      <button class="close-btn" onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="drawer-body" id="cartItemsContainer"></div>
+    <div class="drawer-footer">
+      <div id="wholesaleSavingsBanner" style="display:none; background:#ecfdf5; color:#047857; padding:8px 12px; border-radius:8px; font-size:0.8rem; font-weight:700; margin-bottom:10px; border:1px solid #a7f3d0;">
+        <i class="fa-solid fa-tags"></i> Tarif grossiste appliqué sur certains articles !
+      </div>
+      <div class="cart-summary-row">
+        <span>Sous-total articles</span>
+        <span id="cartSubtotal">0 FCFA</span>
+      </div>
+      <div class="cart-summary-row">
+        <span>Livraison Brazzaville</span>
+        <span style="color:var(--success); font-weight:700;">Selon quartier</span>
+      </div>
+      <div class="cart-total">
+        <span>Total estimé</span>
+        <span class="amount" id="cartTotal">0 FCFA</span>
+      </div>
+
+      <div class="checkout-form" id="checkoutFormSection">
+        <input type="text" id="custName" placeholder="Votre nom complet *" required>
+        <input type="tel" id="custPhone" placeholder="Téléphone / WhatsApp (ex: 06...) *" required>
+        <select id="custNeighborhood">
+          <option value="Mfilou / La Base (Retrait ou livraison)">Quartier : Mfilou / La Base</option>
+          <option value="Bacongo / Makélékélé">Quartier : Bacongo / Makélékélé</option>
+          <option value="Centre-ville / Poto-Poto">Quartier : Centre-ville / Poto-Poto</option>
+          <option value="Moungali / Ouenzé">Quartier : Moungali / Ouenzé</option>
+          <option value="Talangaï / Kintélé">Quartier : Talangaï / Kintélé</option>
+          <option value="Expédition Pointe-Noire / Dolisie">Expédition : Pointe-Noire / Dolisie</option>
+        </select>
+        <button class="btn-checkout" onclick="submitOrder('site')">
+          <i class="fa-solid fa-check-circle"></i> Valider la commande
+        </button>
+        <button class="btn-whatsapp-order" onclick="submitOrder('whatsapp')">
+          <i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MODAL DÉTAIL PRODUIT -->
+  <div class="modal-overlay" id="productDetailModal">
+    <div class="modal-box" style="max-width: 760px;">
+      <div class="modal-header">
+        <h3 id="detailModalTitle">Détails de l'article</h3>
+        <button class="close-btn" onclick="closeDetailModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="detailModalBody"></div>
+    </div>
+  </div>
+
+  <!-- MODAL ESPACE ADMINISTRATEUR -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-shield-halved" style="color:var(--primary)"></i> Espace Administrateur — Hiram TECH</h3>
+        <button class="close-btn" onclick="closeAdminModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <!-- ÉCRAN DE CONNEXION PIN -->
+        <div id="adminLoginScreen" class="pin-login-box">
+          <div class="pin-icon"><i class="fa-solid fa-lock"></i></div>
+          <h4>Accès réservé au propriétaire</h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Entrez votre code PIN administrateur (Code par défaut : <strong>1234</strong>)</p>
+          <input type="password" id="adminPinInput" class="pin-input" maxlength="6" placeholder="••••" onkeyup="if(event.key==='Enter') verifyAdminPin()">
+          <div>
+            <button class="btn-primary" onclick="verifyAdminPin()" style="width:220px; justify-content:center;">
+              <i class="fa-solid fa-unlock"></i> Déverrouiller
+            </button>
+          </div>
+          <p id="pinErrorMsg" style="color:var(--danger); font-size:0.82rem; font-weight:700; margin-top:10px; display:none;">Code PIN incorrect.</p>
+        </div>
+
+        <!-- TABLEAU DE BORD ADMIN -->
+        <div id="adminDashboardScreen" style="display:none;">
+          <div class="admin-kpis">
+            <div class="kpi-card">
+              <div class="kpi-label">Articles en ligne</div>
+              <div class="kpi-val" id="kpiTotalProducts">0</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Commandes reçues</div>
+              <div class="kpi-val" id="kpiTotalOrders">0</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Chiffre d'affaires</div>
+              <div class="kpi-val" style="color:var(--success);" id="kpiRevenue">0 FCFA</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Valeur du stock</div>
+              <div class="kpi-val" style="color:var(--primary);" id="kpiStockValue">0 FCFA</div>
+            </div>
+          </div>
+
+          <div class="admin-tabs">
+            <button class="admin-tab active" onclick="switchAdminTab('productsTab', this)"><i class="fa-solid fa-boxes-stacked"></i> Mes Articles</button>
+            <button class="admin-tab" onclick="switchAdminTab('ordersTab', this)"><i class="fa-solid fa-receipt"></i> Commandes Clients</button>
+            <button class="admin-tab" onclick="switchAdminTab('settingsTab', this)"><i class="fa-solid fa-gear"></i> Paramètres & Sauvegarde</button>
+          </div>
+
+          <!-- ONGLET 1 : ARTICLES -->
+          <div id="productsTab" class="admin-panel active">
+            <div class="admin-form-card">
+              <h4 id="productFormTitle" style="margin-bottom:14px; font-size:0.95rem;"><i class="fa-solid fa-plus-circle" style="color:var(--primary)"></i> Ajouter un nouvel article</h4>
+              <input type="hidden" id="editProductId">
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Nom de l'article *</label>
+                  <input type="text" id="prodName" placeholder="Ex: iPhone 15 Pro Max 256Go / Chargeur Rapide 65W GaN">
+                </div>
+                <div class="form-group">
+                  <label>Catégorie *</label>
+                  <select id="prodCategory">
+                    <option value="Smartphones">Smartphones</option>
+                    <option value="Chargeurs & Câbles">Chargeurs & Câbles</option>
+                    <option value="Audio & Montres">Audio & Montres</option>
+                    <option value="Électroménager">Électroménager</option>
+                    <option value="Réparation & Pièces">Réparation & Pièces</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Badge / Étiquette</label>
+                  <select id="prodBadge">
+                    <option value="">Aucun badge</option>
+                    <option value="Arrivage Chine">Arrivage Chine</option>
+                    <option value="Promo">Promo</option>
+                    <option value="Best-Seller">Best-Seller</option>
+                    <option value="Garantie 6 mois">Garantie 6 mois</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Prix Détail (FCFA) *</label>
+                  <input type="number" id="prodRetailPrice" placeholder="Ex: 15000">
+                </div>
+                <div class="form-group">
+                  <label>Prix Gros (FCFA) *</label>
+                  <input type="number" id="prodWholesalePrice" placeholder="Ex: 11500">
+                </div>
+                <div class="form-group">
+                  <label>Quantité min. Gros (MOQ)</label>
+                  <input type="number" id="prodMoq" value="3" min="2">
+                </div>
+                <div class="form-group">
+                  <label>Stock disponible (pièces)</label>
+                  <input type="number" id="prodStock" value="20" min="0">
+                </div>
+                <div class="form-group full">
+                  <label>Photo de l'article (Fichier téléphone/PC ou Lien URL)</label>
+                  <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                    <input type="file" id="prodImageFile" accept="image/*" onchange="handleImageUpload(event)" style="flex:1; min-width:200px;">
+                    <input type="text" id="prodImageUrl" placeholder="Ou collez le lien https://... de l'image" style="flex:1; min-width:200px;">
+                  </div>
+                  <img id="prodImagePreview" src="" alt="Aperçu" style="display:none; width:72px; height:72px; object-fit:cover; border-radius:8px; margin-top:8px; border:1px solid var(--border);">
+                </div>
+                <div class="form-group full">
+                  <label>Description & Caractéristiques techniques</label>
+                  <textarea id="prodDesc" rows="2" placeholder="Ex: Capacité batterie 5000mAh, charge rapide, livré avec boîte scellée..."></textarea>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; margin-top:14px;">
+                <button class="btn-primary" onclick="saveProduct()">
+                  <i class="fa-solid fa-floppy-disk"></i> <span id="saveProductBtnText">Publier l'article</span>
+                </button>
+                <button class="action-btn" id="cancelEditBtn" style="display:none;" onclick="resetProductForm()">Annuler la modification</button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Article</th>
+                    <th>Catégorie</th>
+                    <th>Prix Détail</th>
+                    <th>Prix Gros</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ONGLET 2 : COMMANDES -->
+          <div id="ordersTab" class="admin-panel">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>N° Commande</th>
+                    <th>Client & Quartier</th>
+                    <th>Articles</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                  </tr>
+                </thead>
+                <tbody id="adminOrdersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ONGLET 3 : PARAMÈTRES & BACKUP -->
+          <div id="settingsTab" class="admin-panel">
+            <div class="admin-form-card">
+              <h4 style="margin-bottom:14px;">Informations de la boutique & Sécurité</h4>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Numéro WhatsApp de réception des commandes (avec indicatif 242)</label>
+                  <input type="text" id="settingWhatsapp" value="242060000000">
+                </div>
+                <div class="form-group">
+                  <label>Nouveau Code PIN Admin</label>
+                  <input type="text" id="settingPin" value="1234" maxlength="6">
+                </div>
+                <div class="form-group full">
+                  <label>Adresse de la boutique</label>
+                  <input type="text" id="settingAddress" value="90 rue Kingoué, quartier La Base, Mfilou, Brazzaville">
+                </div>
+              </div>
+              <button class="btn-primary" style="margin-top:14px;" onclick="saveStoreSettings()">
+                <i class="fa-solid fa-check"></i> Enregistrer les paramètres
+              </button>
+            </div>
+
+            <div class="admin-form-card">
+              <h4 style="margin-bottom:8px;">Sauvegarde & Transfert du Catalogue (JSON)</h4>
+              <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:14px;">Exportez vos produits et prix pour les sauvegarder sur votre ordinateur/téléphone ou les transférer vers un autre appareil.</p>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="action-btn" onclick="exportCatalogJSON()"><i class="fa-solid fa-download"></i> Exporter mon catalogue (.json)</button>
+                <label class="action-btn" style="cursor:pointer;">
+                  <i class="fa-solid fa-upload"></i> Importer un fichier (.json)
+                  <input type="file" accept=".json" style="display:none;" onchange="importCatalogJSON(event)">
+                </label>
+                <button class="action-btn" style="color:var(--danger); border-color:#fecaca;" onclick="resetDemoData()"><i class="fa-solid fa-rotate-left"></i> Réinitialiser catalogue démo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toastBox"><i class="fa-solid fa-circle-check"></i> <span id="toastMessage">Action effectuée</span></div>
+
+  <!-- Lien vers ton fichier JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
