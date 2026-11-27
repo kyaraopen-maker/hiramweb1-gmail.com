@@ -563,7 +563,7 @@ body {
   color: var(--navy);
   margin-bottom: 10px;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  /* -webkit-line-clamp: 2; */
   -webkit-box-orient: vertical;
   overflow: hidden;
   cursor: pointer;
@@ -573,7 +573,7 @@ body {
   color: var(--primary);
 }
 
-/* BLOC PRIX B2B / B2C */
+ 
 .price-tiers {
   background: #f8fafc;
   border: 1px solid var(--border);
